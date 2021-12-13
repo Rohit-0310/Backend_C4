@@ -11,7 +11,7 @@ const newToken = (user) => {
 const register = async (req, res) => {
     try{
 
-        const user = await User.findOne({email: req.body.email}).lean().exac();
+        let user = await User.findOne({email: req.body.email}).lean().exec();
         
         if(user)
         return res.status(400).json({status: "failed", message: "Please Register with Different email",
@@ -30,7 +30,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try{
 
-        const user = await User.findOne({email: req.body.email});
+        let user = await User.findOne({email: req.body.email});
         
         if(!user)
         return res.status(400).json({status: "failed", message: "Please register then Login",
